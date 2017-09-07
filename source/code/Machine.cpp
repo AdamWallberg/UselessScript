@@ -3,6 +3,7 @@
 #include "Types.h"
 #include <stdio.h>
 #include <cstring>
+#include <string>
 
 Machine::Machine()
 	: m_stackSize(0)
@@ -47,6 +48,16 @@ void Machine::run(char code[], int size)
 			push(value);
 			break;
 		}
+		case Inst::STRING:
+		{
+			int length = code[++i];
+			for (int j = 0; j < length; j++)
+			{
+				push(code[++i]);
+			}
+			push(length);
+			break;
+		}
 		case Inst::NEGATIVE:
 		{
 			int value = pop();
@@ -87,6 +98,19 @@ void Machine::run(char code[], int size)
 			float vf;
 			memcpy(&vf, &value, sizeof(float));
 			printf("%d\t%f\n", value, vf);
+			break;
+		}
+		case Inst::PRINTS:
+		{
+			std::string value;
+			unsigned char size = pop();
+
+			for (int j = 0; j < size; j++)
+			{
+				value.insert(value.begin(), pop());
+			}
+
+			printf("%s\n", value.c_str());
 			break;
 		}
 		}

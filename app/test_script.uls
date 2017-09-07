@@ -1,2 +1,2 @@
-PRINT(ADD(1, 2))
-PRINT("Hello World!")
+PRINT( ADD( 1, 2 ) )
+PRINTS( "Hello World!" )

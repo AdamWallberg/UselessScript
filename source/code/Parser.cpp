@@ -15,6 +15,7 @@ Parser::Parser()
 	ADD_EXPRESSION("MUL", MULTIPLY);
 	ADD_EXPRESSION("DIV", DIVIDE);
 	ADD_EXPRESSION("PRINT", PRINT);
+	ADD_EXPRESSION("PRINTS", PRINTS);
 }
 
 std::vector<unsigned char> Parser::readAndParse(const char* filePath)
@@ -32,7 +33,7 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 			continue;
 
 		// Remove whitespace
-		line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
+		//line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
 
 		while (true) // Iterate parentheses
 		{
@@ -79,6 +80,10 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 
 				ArgType argType = checkArgumentType(arg);
 
+				// Remove whitespace
+				if(argType != STRING)
+					arg.erase(std::remove(arg.begin(), arg.end(), ' '), arg.end());
+
 				if (argType == EXPRESSION)
 				{
 					code.push_back(getExpressionCode(arg));
@@ -116,12 +121,19 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 					code.push_back(data[2]);
 					code.push_back(data[3]);
 				}
-				else if (argType == STRING)
+				if (argType == STRING)
 				{
-					arg.erase(0, 1);
-					arg.erase(arg.size() - 1, arg.size());
-					int stringLength = arg.size();
+					size_t stringStart = arg.find_first_of('"');
+					size_t stringEnd = arg.find_last_of('"');
+					arg = arg.substr(stringStart + 1, stringEnd - (stringStart + 1));
 
+					int stringLength = arg.size();
+					code.push_back(Inst::STRING);
+					code.push_back((unsigned char)stringLength);
+					for (int i = 0; i < stringLength; i++)
+					{
+						code.push_back(arg[i]);
+					}
 				}
 
 				// Do this last
@@ -152,6 +164,11 @@ unsigned char Parser::getExpressionCode(std::string expr)
 
 Parser::ArgType Parser::checkArgumentType(std::string arg)
 {
+	arg.erase(std::remove(arg.begin(), arg.end(), ' '), arg.end());
+
+	if (arg[0] == '"' && arg[arg.size() - 1] == '"')
+		return ArgType::STRING;
+	
 	if (arg[0] >= '0' && arg[0] <= '9')
 	{
 		size_t dotPos = arg.find('.');
@@ -166,9 +183,6 @@ Parser::ArgType Parser::checkArgumentType(std::string arg)
 				return ArgType::INTEGER;
 		}
 	}
-	
-	if (arg[0] == '"' && arg[arg.size() - 1] == '"')
-		return ArgType::STRING;
 
 	return ArgType::EXPRESSION;
 }
