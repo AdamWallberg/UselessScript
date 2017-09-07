@@ -8,7 +8,6 @@
 
 Parser::Parser()
 {
-	// TODO: Setup syntax chart
 #define ADD_EXPRESSION(NAME, CODE) m_syntaxChart[NAME] = Inst::CODE
 
 	ADD_EXPRESSION("ADD", ADD);
@@ -82,9 +81,7 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 
 				if (argType == EXPRESSION)
 				{
-					unsigned char inst = m_syntaxChart[arg];
-					// TODO: Check for error
-					code.push_back(inst);
+					code.push_back(getExpressionCode(arg));
 				}
 				else if (argType == BYTE)
 				{
@@ -129,11 +126,21 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 		}
 
 		// Check base expression
-		unsigned char inst = m_syntaxChart[line];
-		code.push_back(inst);
+		code.push_back(getExpressionCode(line));
 	}
 
 	return code;
+}
+
+unsigned char Parser::getExpressionCode(std::string expr)
+{
+	auto it = m_syntaxChart.find(expr);
+	if (it == m_syntaxChart.end())
+	{
+		printf("Couldn't find expression: %s\n", expr.c_str());
+		assert(false);
+	}
+	return (*it).second;
 }
 
 Parser::ArgType Parser::checkArgumentType(std::string arg)

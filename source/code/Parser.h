@@ -18,6 +18,7 @@ private:
 		EXPRESSION
 	};
 
+	unsigned char getExpressionCode(std::string expr);
 	ArgType checkArgumentType(std::string arg);
 
 	std::map<std::string, unsigned char> m_syntaxChart;
