@@ -138,7 +138,6 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 
 Parser::ArgType Parser::checkArgumentType(std::string arg)
 {
-	// TODO: Check type of argument, for now, do this stupid shit
 	if (arg[0] >= '0' && arg[0] <= '9')
 	{
 		size_t dotPos = arg.find('.');
