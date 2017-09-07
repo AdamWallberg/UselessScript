@@ -11,6 +11,6 @@ enum Inst : unsigned char
 	SUBTRACT,
 	MULTIPLY,
 	DIVIDE,
-	PRINT,
-	PRINTS,
+	PRINT_I,
+	PRINT_S,
 };

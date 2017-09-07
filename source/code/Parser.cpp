@@ -14,8 +14,8 @@ Parser::Parser()
 	ADD_EXPRESSION("SUB", SUBTRACT);
 	ADD_EXPRESSION("MUL", MULTIPLY);
 	ADD_EXPRESSION("DIV", DIVIDE);
-	ADD_EXPRESSION("PRINT", PRINT);
-	ADD_EXPRESSION("PRINTS", PRINTS);
+	ADD_EXPRESSION("PRINT_I", PRINT_I);
+	ADD_EXPRESSION("PRINT_S", PRINT_S);
 }
 
 std::vector<unsigned char> Parser::readAndParse(const char* filePath)

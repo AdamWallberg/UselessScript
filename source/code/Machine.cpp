@@ -92,15 +92,15 @@ void Machine::run(char code[], int size)
 			push(a / b);
 			break;
 		}
-		case Inst::PRINT:
+		case Inst::PRINT_I:
 		{
 			int value = pop();
 			float vf;
 			memcpy(&vf, &value, sizeof(float));
-			printf("%d\t%f\n", value, vf);
+			printf("%d\n", value);
 			break;
 		}
-		case Inst::PRINTS:
+		case Inst::PRINT_S:
 		{
 			std::string value;
 			unsigned char size = pop();
