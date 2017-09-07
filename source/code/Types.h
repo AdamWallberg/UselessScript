@@ -1,8 +1,8 @@
 #pragma once
 
-enum Inst
+enum Inst : unsigned char
 {
-	INTEGER,
+	INTEGER = 1,
 	NEGATIVE,
 	ADD,
 	SUBTRACT,

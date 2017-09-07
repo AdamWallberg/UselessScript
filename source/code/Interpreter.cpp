@@ -7,7 +7,7 @@ Interpreter::Interpreter()
 {
 }
 
-void Interpreter::run(int code[], int size)
+void Interpreter::run(char code[], int size)
 {
 	for (int i = 0; i < size; i++)
 	{

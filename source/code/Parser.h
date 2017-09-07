@@ -8,7 +8,17 @@ class Parser
 {
 public:
 	Parser();
-	std::vector<int> readAndParse(const char* filePath);
+	std::vector<unsigned char> readAndParse(const char* filePath);
 private:
-	std::map<std::string, int> m_syntaxChart;
+	enum ArgType
+	{
+		BYTE,
+		INTEGER,
+		FLOAT,
+		EXPRESSION
+	};
+
+	ArgType checkArgumentType(std::string arg);
+
+	std::map<std::string, unsigned char> m_syntaxChart;
 };

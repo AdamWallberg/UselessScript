@@ -4,7 +4,7 @@ class Interpreter
 {
 public:
 	Interpreter();
-	void run(int code[], int size);
+	void run(char code[], int size);
 private:
 	// Stack
 	static const int MAX_STACK_SIZE = 512;
