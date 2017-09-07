@@ -1,9 +1,9 @@
 #pragma once
 
-class Interpreter
+class Machine
 {
 public:
-	Interpreter();
+	Machine();
 	void run(char code[], int size);
 private:
 	// Stack

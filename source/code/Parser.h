@@ -15,7 +15,8 @@ private:
 		BYTE,
 		INTEGER,
 		FLOAT,
-		EXPRESSION
+		EXPRESSION,
+		STRING,
 	};
 
 	unsigned char getExpressionCode(std::string expr);

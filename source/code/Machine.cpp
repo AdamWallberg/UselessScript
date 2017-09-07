@@ -1,15 +1,15 @@
-#include "Interpreter.h"
+#include "Machine.h"
 #include <assert.h>
 #include "Types.h"
 #include <stdio.h>
 #include <cstring>
 
-Interpreter::Interpreter()
+Machine::Machine()
 	: m_stackSize(0)
 {
 }
 
-void Interpreter::run(char code[], int size)
+void Machine::run(char code[], int size)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -93,13 +93,13 @@ void Interpreter::run(char code[], int size)
 	}
 }
 
-void Interpreter::push(int value)
+void Machine::push(int value)
 {
 	assert(m_stackSize < MAX_STACK_SIZE);
 	m_stack[m_stackSize++] = value;
 }
 
-int Interpreter::pop()
+int Machine::pop()
 {
 	assert(m_stackSize >= 0);
 	return m_stack[--m_stackSize];

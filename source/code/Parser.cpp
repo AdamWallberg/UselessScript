@@ -116,6 +116,13 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 					code.push_back(data[2]);
 					code.push_back(data[3]);
 				}
+				else if (argType == STRING)
+				{
+					arg.erase(0, 1);
+					arg.erase(arg.size() - 1, arg.size());
+					int stringLength = arg.size();
+
+				}
 
 				// Do this last
 				if (negative)
@@ -159,6 +166,9 @@ Parser::ArgType Parser::checkArgumentType(std::string arg)
 				return ArgType::INTEGER;
 		}
 	}
+	
+	if (arg[0] == '"' && arg[arg.size() - 1] == '"')
+		return ArgType::STRING;
 
 	return ArgType::EXPRESSION;
 }
