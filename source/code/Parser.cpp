@@ -100,10 +100,7 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 					code.push_back(inst);
 
 					unsigned char data[4];
-					data[0] = (value >> 24) & 0xff;
-					data[1] = (value >> 16) & 0xff;
-					data[2] = (value >> 8) & 0xff;
-					data[3] = value & 0xff;
+					memcpy(&data[0], &value, sizeof(char) * 4);
 					code.push_back(data[0]);
 					code.push_back(data[1]);
 					code.push_back(data[2]);
@@ -114,7 +111,13 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 					float value = std::stof(arg);
 					unsigned char inst = Inst::FLOAT;
 					code.push_back(inst);
-					// TODO: Split float and push as bytes
+
+					unsigned char data[4];
+					memcpy(&data[0], &value, sizeof(char) * 4);
+					code.push_back(data[0]);
+					code.push_back(data[1]);
+					code.push_back(data[2]);
+					code.push_back(data[3]);
 				}
 
 				// Do this last

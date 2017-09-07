@@ -2,6 +2,7 @@
 #include <assert.h>
 #include "Types.h"
 #include <stdio.h>
+#include <cstring>
 
 Interpreter::Interpreter()
 	: m_stackSize(0)
@@ -29,12 +30,21 @@ void Interpreter::run(char code[], int size)
 			data[1] = code[++i];
 			data[2] = code[++i];
 			data[3] = code[++i];
-			int value = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
+			int value;
+			memcpy(&value, &data[0], sizeof(char) * 4);
 			push(value);
 			break;
 		}
 		case Inst::FLOAT:
 		{
+			unsigned char data[4];
+			data[0] = code[++i];
+			data[1] = code[++i];
+			data[2] = code[++i];
+			data[3] = code[++i];
+			int value;
+			memcpy(&value, &data[0], sizeof(char) * 4);
+			push(value);
 			break;
 		}
 		case Inst::NEGATIVE:
@@ -74,7 +84,9 @@ void Interpreter::run(char code[], int size)
 		case Inst::PRINT:
 		{
 			int value = pop();
-			printf("%d\n", value);
+			float vf;
+			memcpy(&vf, &value, sizeof(float));
+			printf("%d\t%f\n", value, vf);
 			break;
 		}
 		}
