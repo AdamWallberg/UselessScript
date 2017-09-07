@@ -32,6 +32,9 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 		if (line.size() == 0)
 			continue;
 
+		if (line[0] == '/' && line[1] == '/')
+			continue;
+
 		while (true) // Iterate parentheses
 		{
 			// Find last set of parentheses
