@@ -32,9 +32,6 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 		if (line.size() == 0)
 			continue;
 
-		// Remove whitespace
-		//line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
-
 		while (true) // Iterate parentheses
 		{
 			// Find last set of parentheses
