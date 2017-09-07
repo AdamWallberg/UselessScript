@@ -2,7 +2,9 @@
 
 enum Inst : unsigned char
 {
-	INTEGER = 1,
+	BYTE = 1,
+	INTEGER,
+	FLOAT,
 	NEGATIVE,
 	ADD,
 	SUBTRACT,

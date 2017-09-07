@@ -1,2 +1,2 @@
-ADD(3, -5)
 PRINT( 5 )
+PRINT(ADD(3, -5))
