@@ -24,6 +24,13 @@ void Interpreter::run(char code[], int size)
 		}
 		case Inst::INTEGER:
 		{
+			unsigned char data[4];
+			data[0] = code[++i];
+			data[1] = code[++i];
+			data[2] = code[++i];
+			data[3] = code[++i];
+			int value = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
+			push(value);
 			break;
 		}
 		case Inst::FLOAT:
@@ -32,41 +39,41 @@ void Interpreter::run(char code[], int size)
 		}
 		case Inst::NEGATIVE:
 		{
-			char value = pop();
+			int value = pop();
 			push(-value);
 			break;
 		}
 		case Inst::ADD:
 		{
-			char a = pop();
-			char b = pop();
+			int a = pop();
+			int b = pop();
 			push(a + b);
 			break;
 		}
 		case Inst::SUBTRACT:
 		{
-			char a = pop();
-			char b = pop();
+			int a = pop();
+			int b = pop();
 			push(b - a);
 			break;
 		}
 		case Inst::MULTIPLY:
 		{
-			char a = pop();
-			char b = pop();
+			int a = pop();
+			int b = pop();
 			push(a * b);
 			break;
 		}
 		case Inst::DIVIDE:
 		{
-			char a = pop();
-			char b = pop();
+			int a = pop();
+			int b = pop();
 			push(a / b);
 			break;
 		}
 		case Inst::PRINT:
 		{
-			char value = pop();
+			int value = pop();
 			printf("%d\n", value);
 			break;
 		}

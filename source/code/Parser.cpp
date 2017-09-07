@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <vector>
 #include "Types.h"
+#include <cmath>
 
 Parser::Parser()
 {
@@ -94,11 +95,26 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 				}
 				else if (argType == INTEGER)
 				{
+					int value = std::stoi(arg);
+					unsigned char inst = Inst::INTEGER;
+					code.push_back(inst);
 
+					unsigned char data[4];
+					data[0] = (value >> 24) & 0xff;
+					data[1] = (value >> 16) & 0xff;
+					data[2] = (value >> 8) & 0xff;
+					data[3] = value & 0xff;
+					code.push_back(data[0]);
+					code.push_back(data[1]);
+					code.push_back(data[2]);
+					code.push_back(data[3]);
 				}
 				else if (argType == FLOAT)
 				{
-
+					float value = std::stof(arg);
+					unsigned char inst = Inst::FLOAT;
+					code.push_back(inst);
+					// TODO: Split float and push as bytes
 				}
 
 				// Do this last
@@ -121,7 +137,19 @@ Parser::ArgType Parser::checkArgumentType(std::string arg)
 {
 	// TODO: Check type of argument, for now, do this stupid shit
 	if (arg[0] >= '0' && arg[0] <= '9')
-		return ArgType::BYTE;
+	{
+		size_t dotPos = arg.find('.');
+		if (dotPos != std::string::npos)
+			return ArgType::FLOAT;
+		else
+		{
+			int value = std::stoi(arg);
+			if (value < 256)
+				return ArgType::BYTE;
+			else
+				return ArgType::INTEGER;
+		}
+	}
 
 	return ArgType::EXPRESSION;
 }
