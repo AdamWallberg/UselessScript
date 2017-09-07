@@ -72,9 +72,10 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 
 				// Check if there's a negative operator
 				bool negative = false;
-				if (arg[0] == '-')
+				size_t negPos = arg.find('-');
+				if (negPos != std::string::npos)
 				{
-					arg.erase(0, 1);
+					arg.erase(negPos, negPos);
 					negative = true;
 				}
 
