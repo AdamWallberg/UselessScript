@@ -87,7 +87,7 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 				else if (argType == BYTE)
 				{
 					char value = std::stoi(arg);
-					unsigned char inst = Inst::INTEGER;
+					unsigned char inst = Inst::BYTE;
 					code.push_back(inst);
 					code.push_back(value);
 				}
