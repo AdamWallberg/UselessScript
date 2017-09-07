@@ -9,5 +9,6 @@ enum Inst : unsigned char
 	ADD,
 	SUBTRACT,
 	MULTIPLY,
+	DIVIDE,
 	PRINT,
 };

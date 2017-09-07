@@ -47,7 +47,7 @@ void Interpreter::run(char code[], int size)
 		{
 			char a = pop();
 			char b = pop();
-			push(a - b);
+			push(b - a);
 			break;
 		}
 		case Inst::MULTIPLY:
@@ -55,6 +55,13 @@ void Interpreter::run(char code[], int size)
 			char a = pop();
 			char b = pop();
 			push(a * b);
+			break;
+		}
+		case Inst::DIVIDE:
+		{
+			char a = pop();
+			char b = pop();
+			push(a / b);
 			break;
 		}
 		case Inst::PRINT:
