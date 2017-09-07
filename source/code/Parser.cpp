@@ -7,5 +7,7 @@ Parser::Parser()
 
 std::vector<int> Parser::readAndParse(const char* filePath)
 {
+	std::vector<int> code;
 
+	return code;
 }
