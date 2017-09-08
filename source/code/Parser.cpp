@@ -32,6 +32,9 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 		if (line.size() == 0)
 			continue;
 
+		// Remove tabs
+		line.erase(std::remove(line.begin(), line.end(), '\t'), line.end());
+
 		if (line[0] == '/' && line[1] == '/')
 			continue;
 
