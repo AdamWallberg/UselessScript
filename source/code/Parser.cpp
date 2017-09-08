@@ -31,12 +31,12 @@ std::vector<unsigned char> Parser::readAndParse(const char* filePath)
 
 	while (std::getline(file, line)) // Iterate lines
 	{
+		// Remove tabs
+		line.erase(std::remove(line.begin(), line.end(), '\t'), line.end());
+
 		// Ignore empty lines
 		if (line.size() == 0)
 			continue;
-
-		// Remove tabs
-		line.erase(std::remove(line.begin(), line.end(), '\t'), line.end());
 
 		if (line[0] == '/' && line[1] == '/')
 			continue;

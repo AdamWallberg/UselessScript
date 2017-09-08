@@ -12,7 +12,9 @@ Machine::Machine()
 
 void Machine::run(char code[], int size)
 {
-	bool inConditionalExpression = false;
+	int ifDepth = 0;
+	int posDepth = 0;
+
 	for (int i = 0; i < size; i++)
 	{
 		int instruction = code[i];
@@ -117,37 +119,67 @@ void Machine::run(char code[], int size)
 		case Inst::IF:
 		{
 			int value = pop();
-			inConditionalExpression = true;
 
+			ifDepth++;
 			if (value == 0)
 			{
+				int numEncounters = 0;
 				while (true)
 				{
 					unsigned char value = code[++i];
+
+					if (value == Inst::IF)
+						numEncounters++;
+
 					if (value == Inst::ELSE || value == Inst::END)
-						break;
+					{
+						if (numEncounters > 0)
+						{
+							if(value == Inst::END)
+								numEncounters--;
+						}
+						else
+						{
+							i--;
+							break;
+						}
+					}
 				}
+			}
+			else
+			{
+				posDepth++;
 			}
 			break;
 		}
 		case Inst::ELSE:
 		{
-			if (inConditionalExpression)
+			if (ifDepth == posDepth)
 			{
 				while (true)
 				{
 					unsigned char value = code[++i];
 					if (value == Inst::END)
+					{
+						i--;
 						break;
+					}
 				}
 			}
-			inConditionalExpression = true;
+			else
+			{
+				posDepth++;
+			}
 			break;
 		}
 		case Inst::END:
 		{
-			inConditionalExpression = false;
-
+			ifDepth--;
+			if (ifDepth < 0)
+				ifDepth = 0;
+			posDepth--;
+			if (posDepth < 0)
+				posDepth = 0;
 			break;
 		}
 		}
