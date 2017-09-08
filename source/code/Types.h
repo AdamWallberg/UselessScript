@@ -13,4 +13,7 @@ enum Inst : unsigned char
 	DIVIDE,
 	PRINT_I,
 	PRINT_S,
+	IF,
+	ELSE,
+	END
 };

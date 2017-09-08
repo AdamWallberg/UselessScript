@@ -12,6 +12,7 @@ Machine::Machine()
 
 void Machine::run(char code[], int size)
 {
+	bool inConditionalExpression = false;
 	for (int i = 0; i < size; i++)
 	{
 		int instruction = code[i];
@@ -111,6 +112,42 @@ void Machine::run(char code[], int size)
 			}
 
 			printf("%s\n", value.c_str());
+			break;
+		}
+		case Inst::IF:
+		{
+			int value = pop();
+			inConditionalExpression = true;
+
+			if (value == 0)
+			{
+				while (true)
+				{
+					unsigned char value = code[++i];
+					if (value == Inst::ELSE || value == Inst::END)
+						break;
+				}
+			}
+			break;
+		}
+		case Inst::ELSE:
+		{
+			if (inConditionalExpression)
+			{
+				while (true)
+				{
+					unsigned char value = code[++i];
+					if (value == Inst::END)
+						break;
+				}
+			}
+			inConditionalExpression = true;
+			break;
+		}
+		case Inst::END:
+		{
+			inConditionalExpression = false;
+
 			break;
 		}
 		}

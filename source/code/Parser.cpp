@@ -16,6 +16,9 @@ Parser::Parser()
 	ADD_EXPRESSION("DIV", DIVIDE);
 	ADD_EXPRESSION("PRINT_I", PRINT_I);
 	ADD_EXPRESSION("PRINT_S", PRINT_S);
+	ADD_EXPRESSION("IF", IF);
+	ADD_EXPRESSION("ELSE", ELSE);
+	ADD_EXPRESSION("END", END);
 }
 
 std::vector<unsigned char> Parser::readAndParse(const char* filePath)

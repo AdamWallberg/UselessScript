@@ -1,5 +1,15 @@
-PRINT_S("Hello World!")
-PRINT_I(ADD(1, 2))
-PRINT_I(ADD(3, MUL(3, 3)))
-//PRINT_S("This shit ain't gonna get printed")
-PRINT_I(MUL(3, -3))
+PRINT_S("Testing IF statement")
+
+IF(1)
+	PRINT_I(1)
+ELSE()
+	PRINT_I(0)
+END()
+
+PRINT_S("Testing ELSE statement")
+
+IF(0)
+	PRINT_I(1)
+ELSE()
+	PRINT_I(0)
+END()
