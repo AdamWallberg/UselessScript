@@ -182,6 +182,41 @@ void Machine::run(char code[], int size)
 				posDepth = 0;
 			break;
 		}
+		case Inst::CMP:
+		{
+			int a = pop();
+			int b = pop();
+			push(a == b);
+			break;
+		}
+		case Inst::GT:
+		{
+			int a = pop();
+			int b = pop();
+			push(a > b);
+			break;
+		}
+		case Inst::LT:
+		{
+			int a = pop();
+			int b = pop();
+			push(a < b);
+			break;
+		}
+		case Inst::GTE:
+		{
+			int a = pop();
+			int b = pop();
+			push(a >= b);
+			break;
+		}
+		case Inst::LTE:
+		{
+			int a = pop();
+			int b = pop();
+			push(a <= b);
+			break;
+		}
 		}
 	}
 }

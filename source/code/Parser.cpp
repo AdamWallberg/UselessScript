@@ -19,6 +19,11 @@ Parser::Parser()
 	ADD_EXPRESSION("IF", IF);
 	ADD_EXPRESSION("ELSE", ELSE);
 	ADD_EXPRESSION("END", END);
+	ADD_EXPRESSION("CMP", CMP);
+	ADD_EXPRESSION("GT", GT);
+	ADD_EXPRESSION("LT", LT);
+	ADD_EXPRESSION("GTE", GTE);
+	ADD_EXPRESSION("LTE", LTE);
 }
 
 std::vector<unsigned char> Parser::readAndParse(const char* filePath)

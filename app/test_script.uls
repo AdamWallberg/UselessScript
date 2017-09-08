@@ -1,22 +1,11 @@
-IF(1)
-	IF(1)
-		IF(0)
-			IF(1)
-				PRINT_I(6)
-			ELSE()
-				PRINT_I(33)
-			END()
-		ELSE()
-			PRINT_I(5)
-			IF(0)
-				PRINT_I(9)
-			ELSE()
-				PRINT_I(8)
-			END()
-		END()
-	ELSE()
-		PRINT_I(0)
-	END()
-ELSE()
+IF(LT(1, 0))
+	PRINT_I(0)
+ELSE
+	PRINT_I(1)
+END
+
+IF(GTE(4, 5))
+	PRINT_I(2)
+ELSE
 	PRINT_I(3)
-END()
+END

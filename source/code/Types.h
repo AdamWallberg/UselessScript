@@ -11,9 +11,14 @@ enum Inst : unsigned char
 	SUBTRACT,
 	MULTIPLY,
 	DIVIDE,
-	PRINT_I,
-	PRINT_S,
+	PRINT_I, // print integer
+	PRINT_S, // print string
 	IF,
 	ELSE,
-	END
+	END,
+	CMP, // compare
+	GT, // greater than
+	LT, // lesser than
+	GTE, // greater than or equals
+	LTE, // less than or equals
 };
