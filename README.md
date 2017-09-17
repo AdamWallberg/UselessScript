@@ -3,3 +3,5 @@
 In other words, a useless custom scripting language. 
 
 The machine, stack, and bytecode works as intended. But the parser is merely a spaghetti-coded test case, since it was never my intention to create an actual scripting language. 
+
+MESSAGE: No longer working on this. I decided this project was complete enough, considering my initial goal of just interpreting bytecode.
